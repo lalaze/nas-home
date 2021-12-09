@@ -1,14 +1,10 @@
-import React from 'react';
-import { Menu, Dropdown } from 'antd';
 import './App.less';
-
-
-
+import LeftPanel  from './components/leftPanel';
 
 function App() {
   return (
     <div className="App">
-
+      <LeftPanel></LeftPanel>
     </div>
   );
 }

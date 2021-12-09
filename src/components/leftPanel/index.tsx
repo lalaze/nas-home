@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
-import './leftPanel.less'
+import React, { useState } from "react";
+import "./leftPanel.less";
+import Edit from '../edit/edit'
 
 const LeftPanel: React.FC = () => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   return (
-    <div className="panelIcon" onClick={() => {
-      setShow(true)
-    }}></div>
-  )
-}
+    <div className="bg">
+      {show ? <Edit></Edit> : ''}
+      <div
+        className="panelIcon"
+        onClick={() => {
+          setShow(true);
+        }}
+      ></div>
+    </div>
+  );
+};
 
-export default LeftPanel
+export default LeftPanel;
