@@ -47,7 +47,9 @@ const Edit: React.FC = () => {
             <div className="label">图标</div>
             <div className="list">
               <div className="colorArea">
-                <div className="block" style={{background: color}}></div>
+                <div className="block" style={{background: color}}>
+                  <div className="text">{name.slice(0,2)}</div>
+                </div>
                 <div className="text">纯色图标</div>
               </div>
               <UploadCard></UploadCard>
