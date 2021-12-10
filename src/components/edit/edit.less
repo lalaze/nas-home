@@ -48,6 +48,11 @@
 .content {
   height: calc(100% - 65px);
   background: #efefef;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 20px;
 }
 
 .leftIn {
@@ -57,4 +62,49 @@
 @keyframes leftin {
   0% {transform: translateX(100%);}
   100% {transform: translateX(0);}
+}
+
+.card {
+  width: 90%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  .card-item {
+    width: 90%;
+    margin-top: 20px;
+  }
+}
+
+.uploadArea {
+  width: 90%;
+  margin-top: 20px;
+  .label {
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+    margin-left: 3px;    
+  }
+  .list {
+    margin-top: 15px;
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+.colorArea {
+  margin-right: 6px;
+  .block {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 8px;
+  }
+}
+.colorPicker {
+  width: 90%;
+  margin-top: 20px;
 }
