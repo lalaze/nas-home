@@ -22,6 +22,7 @@
     background-size: 100% 100%;
     background-image: url('../../assest/close.png');
     margin-right: 20px;
+    cursor: pointer;
   }
   .addArea {
     display: flex;
@@ -59,9 +60,18 @@
   animation: leftin 0.7s linear 1;
 }
 
+.leftOut {
+  animation: leftout 0.7s linear 1;
+}
+
 @keyframes leftin {
   0% {transform: translateX(100%);}
   100% {transform: translateX(0);}
+}
+
+@keyframes leftout {
+  0% {transform: translateX(0);}
+  100% {transform: translateX(100%);}
 }
 
 .card {
@@ -94,6 +104,31 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    .Icon {
+      width: 58px;
+      height: 58px;
+      background-size: 100% 100%;
+      position: relative;
+      margin-bottom: 26px;
+      .cover {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+      }
+      .close {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 20px;
+        height: 20px;
+        background-image: url('../../assest/close2.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+    }
   }
 }
 .colorArea {
@@ -102,9 +137,23 @@
     width: 60px;
     height: 60px;
     margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .text {
+      color: #fff;
+      font-size: 24px;
+    }
   }
 }
 .colorPicker {
   width: 90%;
   margin-top: 20px;
+}
+.buttonList {
+  width: 90%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }

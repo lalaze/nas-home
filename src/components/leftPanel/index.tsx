@@ -6,7 +6,7 @@ const LeftPanel: React.FC = () => {
   const [show, setShow] = useState(false)
   return (
     <div className="bg">
-      {show ? <Edit></Edit> : ''}
+      {show ? <Edit setShow={setShow}></Edit> : ''}
       <div
         className="panelIcon"
         onClick={() => {

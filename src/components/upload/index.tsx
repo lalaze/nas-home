@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./upload.less";
 import { Upload, message } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import CropperArea from '../cropper/index'
 
 const beforeUpload = (file: any) => {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -10,22 +11,27 @@ const beforeUpload = (file: any) => {
   }
   const isLt2M = file.size / 1024 / 1024 < 2;
   if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
+    message.error('Image must smaller than 2MB!');
   }
   return isJpgOrPng && isLt2M;
-};
+}
 
-const upload = (option: any) => {
-  console.log(option);
-};
+const UploadCard: React.FC<{setImg: Function}> = (props: any) => {
+  const { setImg } = props
 
-const handleChange = (info: any) => {
-  console.log(info);
-};
-
-const UploadCard: React.FC = () => {
   const [imageUrl] = useState("")
+
   const [loading] = useState(false)
+
+  const [file, setFile] = useState('')
+  
+  const upload = (option: any) => {
+    const reader = new FileReader()
+    reader.onload = (evt: any) => {
+      setFile(evt.target?.result)
+    }
+    reader.readAsDataURL(option.file)
+  }
   return (
     <div className="uploadIcon">
       <Upload
@@ -35,7 +41,6 @@ const UploadCard: React.FC = () => {
         showUploadList={false}
         customRequest={upload}
         beforeUpload={beforeUpload}
-        onChange={handleChange}
       >
         {imageUrl ? (
           <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
@@ -46,6 +51,7 @@ const UploadCard: React.FC = () => {
         )}
       </Upload>
       <div className="text">上传图片</div>
+      {file ? <CropperArea file={file}  setImg={setImg} setFile={setFile}></CropperArea> : ''}
     </div>
   );
 };

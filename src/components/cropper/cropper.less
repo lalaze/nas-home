@@ -1,0 +1,75 @@
+.mask {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    background: rgba(0, 0 ,0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 700px;
+    height: 600px;
+    background: #fff;
+    box-shadow: rgb(0 0 0 / 20%) 0px 6px 6px;
+    border-radius: 3px;
+    z-index: 100;
+    .title {
+        margin-bottom: 30px;
+        width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .label {
+            font-size: 20px;
+            width: auto;
+        }
+        .close {
+            position: absolute;
+            top: 0;
+            right: 35px;
+            width: 30px;
+            height: 30px;
+            background-size: 100% 100%;
+            background-image: url('../../assest/close.png');
+            cursor: pointer;
+        }
+    }
+}
+.cropperArea { 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .right {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        margin-left: 30px;
+        height: 100%;
+        .label {
+            margin-bottom: 10px;
+        }
+    }
+    .preview {
+        width: 200px;
+        height: 200px;
+        background-size: 100% 100%;
+    }
+}
+.corrperButtonList {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+}
