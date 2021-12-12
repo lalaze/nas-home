@@ -7,11 +7,14 @@ export type dataProp = {
 class Store {
     private db: any
 
+    private isConnect = false
+
     constructor() {
          // 如果没有这个数据库,open会自动创建
         const DBOpenRequest = window.indexedDB.open("nas-home", 1);
         DBOpenRequest.onsuccess = (e: any) => {
             this.db = e.target.result
+            this.isConnect = true
         }
         // 如果是新建，数据库新建完会执行这个
         DBOpenRequest.onupgradeneeded = (e: any) => {
@@ -39,8 +42,9 @@ class Store {
 
     }
 
-    public getAll() {
-        return new Promise((resolve) => {
+    public getAll(cb: Function) {
+        console.log(this.isConnect)
+        if (this.isConnect) {
             const store = this.db.transaction(['entrance']).objectStore('entrance');
             const request = store.openCursor()
             const data: dataProp[] = []
@@ -51,11 +55,14 @@ class Store {
                     cursor.continue();
                 }
                 else{
-                    resolve(data)
-                    console.log('没有更多数据了');
+                    cb(data)
                 }
-           }
-        })
+            }
+        } else {
+            setTimeout(() => {
+                this.getAll(cb)
+            }, 100)
+        }
     }
 }
 
