@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,  } from "react";
 import "./edit.less";
 import { Input, Button, message } from "antd";
 import UploadCard from "../upload/index";
@@ -7,7 +7,7 @@ import { TwitterPicker } from 'react-color';
 import html2canvas from 'html2canvas'
 import store from '../../store/index'
 
-const Edit: React.FC<{ setShow: Function}> = (props: any) => {
+const Edit: React.FC<{ setShow: Function, update: Function, setUpdate: Function}> = (props: any) => {
   const [color, setColor] = useState('rgb(255, 105, 0)')
 
   const [site, setSite] = useState('')
@@ -16,7 +16,7 @@ const Edit: React.FC<{ setShow: Function}> = (props: any) => {
 
   const [img, setImg] = useState('')
 
-  const { setShow } = props
+  const { setShow, setUpdate, update } = props
 
   let edit: any = null
 
@@ -38,6 +38,7 @@ const Edit: React.FC<{ setShow: Function}> = (props: any) => {
           icon: imgData
         })
         message.success('保存成功')
+        setUpdate(update + 1)
         clear()
       })
     } else {
@@ -46,6 +47,7 @@ const Edit: React.FC<{ setShow: Function}> = (props: any) => {
         url: site,
         icon: img
       })
+      setUpdate(update + 1)
       message.success('保存成功')
       clear()
     }
