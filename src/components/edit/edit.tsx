@@ -4,6 +4,8 @@ import { Input, Button, message } from "antd";
 import UploadCard from "../upload/index";
 import { GlobalOutlined, FieldStringOutlined } from "@ant-design/icons";
 import { TwitterPicker } from 'react-color';
+import html2canvas from 'html2canvas'
+import store from '../../store/index'
 
 const Edit: React.FC<{ setShow: Function}> = (props: any) => {
   const [color, setColor] = useState('rgb(255, 105, 0)')
@@ -21,7 +23,39 @@ const Edit: React.FC<{ setShow: Function}> = (props: any) => {
   const gogogo = () => {
     if (!site || !name) {
       message.error('请填写完整再提交')
+      return
     }
+    // 拼数据
+    if (!img) {
+      html2canvas((document.getElementById('icon') as HTMLElement), {
+        useCORS: true, // 【重要】开启跨域配置
+        scale: window.devicePixelRatio < 3 ? window.devicePixelRatio : 2,
+      }).then((canvas) => {
+        const imgData = canvas.toDataURL('image/jpeg', 1.0);
+        store.set({
+          name,
+          url: site,
+          icon: imgData
+        })
+        message.success('保存成功')
+        clear()
+      })
+    } else {
+      store.set({
+        name,
+        url: site,
+        icon: img
+      })
+      message.success('保存成功')
+      clear()
+    }
+  }
+
+  const clear = () => {
+    setColor('rgb(255, 105, 0)')
+    setSite('')
+    setImg('')
+    setName('')
   }
 
   return (
@@ -62,7 +96,7 @@ const Edit: React.FC<{ setShow: Function}> = (props: any) => {
             <div className="label">图标</div>
             <div className="list">
               <div className="colorArea">
-                <div className="block" style={{background: color}}>
+                <div className="block" style={{background: color}} id="icon">
                   <div className="text">{name.slice(0,2)}</div>
                 </div>
                 <div className="text">纯色图标</div>
