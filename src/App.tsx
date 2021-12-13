@@ -13,6 +13,7 @@ function App() {
 
   useEffect(() => {
     store.getAll((datas: any) => {
+      console.log(datas)
       setList((datas as any[]))
     })
   }, [update])
@@ -27,7 +28,7 @@ function App() {
     <div className="App">
       <div className="imageBg">
         <div className="iconList">
-          { list.length > 0 ? list.map((item: any) => <div onMouseDown={editIcon} className="icon" style={{ backgroundImage: `url(${item.icon})` }}>
+          { list.length > 0 ? list.map((item: any) => <div key={item.name} onMouseDown={editIcon} className={`icon, ${isEdit ? 'activity' : ''}`} style={{ backgroundImage: `url(${item.icon})` }}>
             {isEdit ? <div className="cover"></div> : ''}
             {isEdit ? <div className="close"></div> : ''}
           </div>) :''}
