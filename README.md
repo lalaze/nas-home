@@ -1,8 +1,11 @@
 ## 目的
 抄Infinity的一个react实现，练习react
 
+## 数据
+用mongoDB跟腾讯云的serverless，账号密码写在了文件夹api的config里，这里不上传的，要自己替换你的服务账号密码
+
 ## todo
 - [ ] 图标抖动编辑
 - [ ] 图标拖动
 - [x] docker部署
-- [ ] 数据改用mongoDB或者serveless
+- [ ] 数据改用mongoDB或者serverless
