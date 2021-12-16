@@ -1,5 +1,5 @@
-import { userName, password } from './config'
-import { MongoClient } from "mongodb"
+const { userName, password } = require('./config')
+const { MongoClient } = require("mongodb")
 
 const uri = `mongodb+srv://${userName}:${password}@cluster0.7jtaj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
@@ -7,15 +7,9 @@ const uri = `mongodb+srv://${userName}:${password}@cluster0.7jtaj.mongodb.net/my
 // {icon: string, name: string, url: string, }
 
 // 还有一个monggo的默认id
-// 写死我的名字去建立一个表，懒得搞账号体系了
-type IconProps = {
-  id?: string,
-  icon: string,
-  name: string,
-  url: string
-}
+// 写死我的名字lalaze去建立一个表，懒得搞账号体系了
 
-async function setIcon(data: IconProps){
+async function setIcon(data){
   const client = new MongoClient(uri);
   await  client.connect();
   // 写死的用户名
@@ -34,7 +28,7 @@ async function getAllIcon(){
   return res
 }
 
-async function updateIcon(data: IconProps){
+async function updateIcon(data){
   const client = new MongoClient(uri)
   await  client.connect();
   const cmd = client.db('lalaze').collection('IconList');
@@ -47,3 +41,6 @@ async function updateIcon(data: IconProps){
   client.close()
   return res
 }
+
+
+module.exports = {setIcon, getAllIcon, updateIcon}
