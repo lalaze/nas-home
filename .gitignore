@@ -21,6 +21,8 @@
 # config
 /src/api/config.ts
 /src/api/config.js
+/src/serverless/config.js
+/src/serverless/config.ts
 
 npm-debug.log*
 yarn-debug.log*

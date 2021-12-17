@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./upload.less";
+import './upload.less';
 import { Upload, message } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import CropperArea from '../cropper/index'

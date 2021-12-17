@@ -1,7 +1,7 @@
 import './App.less';
 import LeftPanel  from './components/leftPanel';
-import store from './store/index'
 import { useState, useEffect } from "react";
+import { getAllIcon } from './api/index'
 
 function App() {
 
@@ -12,10 +12,7 @@ function App() {
   const [isEdit, setEdit] = useState(false)
 
   useEffect(() => {
-    store.getAll((datas: any) => {
-      console.log(datas)
-      setList((datas as any[]))
-    })
+    getAllIcon()
   }, [update])
 
   const editIcon = (event: any) => {
