@@ -5,7 +5,7 @@ import UploadCard from "../upload/index";
 import { GlobalOutlined, FieldStringOutlined } from "@ant-design/icons";
 import { TwitterPicker } from 'react-color';
 import html2canvas from 'html2canvas'
-import store from '../../store/index'
+import { setIcon } from '../../api/index'
 
 const Edit: React.FC<{ setShow: Function, update: Function, setUpdate: Function}> = (props: any) => {
   const [color, setColor] = useState('rgb(255, 105, 0)')
@@ -32,7 +32,7 @@ const Edit: React.FC<{ setShow: Function, update: Function, setUpdate: Function}
         scale: window.devicePixelRatio < 3 ? window.devicePixelRatio : 2,
       }).then((canvas) => {
         const imgData = canvas.toDataURL('image/jpeg', 1.0);
-        store.set({
+        setIcon({
           name,
           url: site,
           icon: imgData
@@ -42,7 +42,7 @@ const Edit: React.FC<{ setShow: Function, update: Function, setUpdate: Function}
         clear()
       })
     } else {
-      store.set({
+      setIcon({
         name,
         url: site,
         icon: img
