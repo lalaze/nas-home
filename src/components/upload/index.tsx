@@ -1,8 +1,7 @@
-import React, { useState, forwardRef, useImperativeHandle, useRef } from "react";
+import React, { useState } from "react";
 import './upload.less';
 import { Upload, message } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import CropperArea from '../cropper/index'
 
 const beforeUpload = (file: any) => {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -16,20 +15,14 @@ const beforeUpload = (file: any) => {
   return isJpgOrPng && isLt2M;
 }
 
-const UploadCard = (props: any, ref: any) => {
-  const { setImg } = props
+const UploadCard: React.FC<{ setImg: any, setFile: any }> = (props: any) => {
+  const { setFile } = props
 
   const [imageUrl] = useState("")
 
   const [loading] = useState(false)
 
-  const [file, setFile] = useState('')
-
-  const test = useRef<HTMLImageElement>(null)
-
-  useImperativeHandle(ref, () => ({
-    test
-  }));
+  // const [file, setFile] = useState('')
   
   const upload = (option: any) => {
     const reader = new FileReader()
@@ -47,7 +40,6 @@ const UploadCard = (props: any, ref: any) => {
         showUploadList={false}
         customRequest={upload}
         beforeUpload={beforeUpload}
-        ref={test}
       >
         {imageUrl ? (
           <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
@@ -58,9 +50,8 @@ const UploadCard = (props: any, ref: any) => {
         )}
       </Upload>
       <div className="text">上传图片</div>
-      {file ? <CropperArea file={file}  setImg={setImg} setFile={setFile}></CropperArea> : ''}
     </div>
   );
 };
 
-export default forwardRef(UploadCard)
+export default UploadCard

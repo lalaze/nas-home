@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./edit.less";
 import { Input, Button, message } from "antd";
 import UploadCard from "../upload/index";
@@ -7,6 +7,7 @@ import { TwitterPicker } from 'react-color';
 import html2canvas from 'html2canvas'
 import { setIcon, updateIcon } from '../../api/index'
 import { v4 as uuidv4 } from 'uuid';
+import CropperArea from '../cropper/index'
 
 const Edit: React.FC<{ setShow: Function, update: Function, 
   setUpdate: Function, editData: any, setEditData: any}> = (props: any) => {
@@ -18,11 +19,11 @@ const Edit: React.FC<{ setShow: Function, update: Function,
 
   const [img, setImg] = useState('')
 
+  const [file, setFile] = useState('')
+
   const [uploadAgain, setUploadAgain] = useState(false)
 
   const { setShow, setUpdate, update, editData, setEditData } = props
-
-  const uploadCardRef = useRef<HTMLInputElement>()
 
   let edit: any = null
 
@@ -119,6 +120,23 @@ const Edit: React.FC<{ setShow: Function, update: Function,
     setUploadAgain(false)
   }
 
+  const uploadAgainInput = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/*'
+    const event = new MouseEvent('click')
+    input.onchange = (e: any) => {
+      const file = e.target.files[0]
+      const fileReader = new FileReader()
+      fileReader.onload = (ee: any) => {
+        // 获取得到的结果
+        setFile(ee.target?.result)
+      }
+      fileReader.readAsDataURL(file)
+    }
+    input.dispatchEvent(event)
+  }
+
   return (
     <div className="edit leftIn" ref={(ref)=>{edit = ref}} onClick={(e) => {
       e.stopPropagation()
@@ -166,7 +184,7 @@ const Edit: React.FC<{ setShow: Function, update: Function,
               onMouseLeave={mouseOut}
               style={{ backgroundImage: img ? `url(${img})` : ''}}>
                 {uploadAgain ? <div className="editIconBg" onClick={() => {
-                  console.log(uploadCardRef)
+                  uploadAgainInput()
                 }}>
                   <div className="editIcon"></div>
                 </div>
@@ -174,7 +192,7 @@ const Edit: React.FC<{ setShow: Function, update: Function,
                 <div className="cover"></div>
                 <div className="close" onClick={() => {setImg('')}}></div>
               </div> 
-              : <UploadCard ref={uploadCardRef} setImg={setImg}></UploadCard>}
+              : <UploadCard setFile={setFile} setImg={setImg}></UploadCard>}
             </div>
           </div>
           <div className="colorPicker">
@@ -190,6 +208,7 @@ const Edit: React.FC<{ setShow: Function, update: Function,
           </div>
         </div>
       </div>
+      {file ? <CropperArea file={file}  setImg={setImg} setFile={setFile}></CropperArea> : ''}
     </div>
   );
 };
