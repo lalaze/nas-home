@@ -7,6 +7,7 @@ type iconType = {
   url: string
   name: string
   icon: string
+  isImg: boolean
 }
 
 export const getAllIcon = () => {
@@ -27,6 +28,21 @@ export const getAllIcon = () => {
 export const setIcon = (data: iconType) => {
   return axios.post(url, {
     method: 'setIcon',
+    data
+  })
+  .then(function (res: any) {
+    if (res.status === 200) {
+      return res.data
+    }
+  })
+  .catch(function (error: any) {
+    console.log(error);
+  });
+}
+
+export const updateIcon = (data: iconType) => {
+  return axios.post(url, {
+    method: 'updateIcon',
     data
   })
   .then(function (res: any) {

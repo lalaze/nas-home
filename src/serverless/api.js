@@ -33,7 +33,7 @@ async function updateIcon(data){
   await  client.connect();
   const cmd = client.db('lalaze').collection('IconList');
   const filter = { id: data.id };
-  const options = { upsert: true };
+  const options = { upsert: false };
   const updateDoc = {
     $set: data
   }

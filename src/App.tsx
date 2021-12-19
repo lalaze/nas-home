@@ -12,6 +12,10 @@ function App() {
 
   const [isEdit, setEdit] = useState(false)
 
+  const [editData, setEditData] = useState(null as any)
+
+  const [editId, setEditId] = useState('')
+
   useEffect(() => {
     updateAllIcon()
   }, [update])
@@ -51,6 +55,18 @@ function App() {
     }
   }
 
+  const mouseMove = (item: any) => {
+    if (editId !== item.id) {
+      setEditId(item.id)
+    }
+  }
+
+  const mouseOut = (item: any) => {
+    if (editId === item.id) {
+      setEditId('')
+    }
+  }
+
   return (
     <div className="App">
       <div className="imageBg">
@@ -60,7 +76,20 @@ function App() {
             e.stopPropagation()
             open(item.url) 
           }}
-          className={`icon ${isEdit ? 'activity' : ''}`} style={{ backgroundImage: `url(${item.icon})` }}>
+          onMouseEnter={() => {
+            mouseMove(item)
+          }}
+          onMouseLeave={() => {
+            mouseOut(item)
+          }}
+          className={`icon ${isEdit ? 'activity' : ''}`} 
+          style={{ backgroundImage: `url(${item.icon})` }}>
+            {isEdit && editId === item.id ? <div className="editIconBg" onClick={() => {
+              setEditData(item)
+            }}>
+              <div className="editIcon"></div>
+            </div>
+             : ''}
             {isEdit ? <div className="cover"></div> : ''}
             {isEdit ? <div className="close" onClick={(e) => {
                 e.stopPropagation()
@@ -69,7 +98,8 @@ function App() {
           </div>) :''}
         </div>
       </div>
-      <LeftPanel update={update} setUpdate={setUpdate}></LeftPanel>
+      <LeftPanel editData={editData} setEditData={setEditData}
+      update={update} setUpdate={setUpdate}></LeftPanel>
     </div>
   );
 }
