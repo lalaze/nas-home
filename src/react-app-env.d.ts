@@ -72,3 +72,5 @@ declare module '*.module.sass' {
 
 declare module 'react-color'
 
+declare module 'uuid'
+

@@ -42,5 +42,14 @@ async function updateIcon(data){
   return res
 }
 
+async function deleteIcon(data){
+  const client = new MongoClient(uri)
+  await  client.connect();
+  const cmd = client.db('lalaze').collection('IconList');
+  const res = await cmd.deleteOne(data)
+  client.close()
+  return res
+}
 
-module.exports = {setIcon, getAllIcon, updateIcon}
+
+module.exports = {setIcon, getAllIcon, updateIcon, deleteIcon}

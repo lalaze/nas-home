@@ -15,7 +15,7 @@ export const getAllIcon = () => {
   })
   .then(function (res: any) {
     if (res.status === 200) {
-      return res.data
+      return res.data.result
     }
   })
   .catch(function (error: any) {
@@ -27,6 +27,22 @@ export const getAllIcon = () => {
 export const setIcon = (data: iconType) => {
   return axios.post(url, {
     method: 'setIcon',
+    data
+  })
+  .then(function (res: any) {
+    if (res.status === 200) {
+      return res.data
+    }
+  })
+  .catch(function (error: any) {
+    console.log(error);
+  });
+}
+
+// get传不了base64的icon数据
+export const deleteIcon = (data: any) => {
+  return axios.post(url, {
+    method: 'deleteIcon',
     data
   })
   .then(function (res: any) {

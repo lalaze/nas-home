@@ -6,6 +6,7 @@
 
 ## todo
 - [ ] 图标抖动编辑
-- [ ] 图标拖动
+- [x] 图标拖动
 - [x] docker部署
-- [ ] 数据改用mongoDB或者serverless
+- [x] 数据改用mongoDB或者serverless
+- [ ] 接入一个图片库随机切换桌面 

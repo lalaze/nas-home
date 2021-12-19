@@ -6,6 +6,7 @@ import { GlobalOutlined, FieldStringOutlined } from "@ant-design/icons";
 import { TwitterPicker } from 'react-color';
 import html2canvas from 'html2canvas'
 import { setIcon } from '../../api/index'
+import { v4 as uuidv4 } from 'uuid';
 
 const Edit: React.FC<{ setShow: Function, update: Function, setUpdate: Function}> = (props: any) => {
   const [color, setColor] = useState('rgb(255, 105, 0)')
@@ -33,23 +34,31 @@ const Edit: React.FC<{ setShow: Function, update: Function, setUpdate: Function}
       }).then((canvas) => {
         const imgData = canvas.toDataURL('image/jpeg', 1.0);
         setIcon({
+          id: uuidv4(),
           name,
           url: site,
           icon: imgData
+        }).then((res) => {
+          if (res.result.insertedId) {
+            setUpdate(update + 1)
+            message.success('保存成功')
+            clear()
+          }
         })
-        message.success('保存成功')
-        setUpdate(update + 1)
-        clear()
       })
     } else {
       setIcon({
+        id: uuidv4(),
         name,
         url: site,
         icon: img
+      }).then((res) => {
+        if (res.result.insertedId) {
+          setUpdate(update + 1)
+          message.success('保存成功')
+          clear()
+        }
       })
-      setUpdate(update + 1)
-      message.success('保存成功')
-      clear()
     }
   }
 

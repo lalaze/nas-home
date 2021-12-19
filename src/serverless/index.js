@@ -14,7 +14,7 @@ const post = async (body) => {
 const main_handler = async (event, context) => {
     let res = 'no Method'
     // 判断是不是post
-    if (event.httpMethod == "POST") {
+    if (event.httpMethod === "POST") {
         res = await post(event.body)
     }
     return {
