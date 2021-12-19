@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react";
+import React, { useState, forwardRef, useImperativeHandle, useRef } from "react";
 import './upload.less';
 import { Upload, message } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
@@ -16,7 +16,7 @@ const beforeUpload = (file: any) => {
   return isJpgOrPng && isLt2M;
 }
 
-const UploadCard: React.FC<{setImg: Function}> = (props: any) => {
+const UploadCard = (props: any, ref: any) => {
   const { setImg } = props
 
   const [imageUrl] = useState("")
@@ -24,6 +24,12 @@ const UploadCard: React.FC<{setImg: Function}> = (props: any) => {
   const [loading] = useState(false)
 
   const [file, setFile] = useState('')
+
+  const test = useRef<HTMLImageElement>(null)
+
+  useImperativeHandle(ref, () => ({
+    test
+  }));
   
   const upload = (option: any) => {
     const reader = new FileReader()
@@ -41,6 +47,7 @@ const UploadCard: React.FC<{setImg: Function}> = (props: any) => {
         showUploadList={false}
         customRequest={upload}
         beforeUpload={beforeUpload}
+        ref={test}
       >
         {imageUrl ? (
           <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
@@ -56,4 +63,4 @@ const UploadCard: React.FC<{setImg: Function}> = (props: any) => {
   );
 };
 
-export default UploadCard;
+export default forwardRef(UploadCard)

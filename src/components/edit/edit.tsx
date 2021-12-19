@@ -166,7 +166,7 @@ const Edit: React.FC<{ setShow: Function, update: Function,
               onMouseLeave={mouseOut}
               style={{ backgroundImage: img ? `url(${img})` : ''}}>
                 {uploadAgain ? <div className="editIconBg" onClick={() => {
-              
+                  console.log(uploadCardRef)
                 }}>
                   <div className="editIcon"></div>
                 </div>
@@ -174,7 +174,7 @@ const Edit: React.FC<{ setShow: Function, update: Function,
                 <div className="cover"></div>
                 <div className="close" onClick={() => {setImg('')}}></div>
               </div> 
-              : <UploadCard setImg={setImg}></UploadCard>}
+              : <UploadCard ref={uploadCardRef} setImg={setImg}></UploadCard>}
             </div>
           </div>
           <div className="colorPicker">
