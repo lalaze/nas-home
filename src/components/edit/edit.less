@@ -12,11 +12,16 @@
 .head {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
+  position: relative;
   .close {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     width: 20px;
     height: 20px;
     background-size: 100% 100%;
@@ -31,11 +36,31 @@
     flex-direction: column;
     margin-left: 30px;
   }
+  .coverArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 30px;
+    cursor: pointer;
+  }
+  .discover {
+    width: 25px;
+    height: 25px;
+    background-size: 100% 100%;
+    background-image: url('../../assest/discover.png');
+  }
   .add {
     width: 25px;
     height: 25px;
     background-size: 100% 100%;
     background-image: url('../../assest/add.png');
+  } 
+  .editIcon {
+    width: 25px;
+    height: 25px;
+    background-size: 100% 100%;
+    background-image: url('../../assest/editIcon.png');
   }
   span {
     display: inline-block;

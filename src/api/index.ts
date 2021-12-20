@@ -1,5 +1,6 @@
 import axios from 'axios'
-import url from './config'
+import { url, token } from './config'
+import { createApi } from 'unsplash-js';
 // url是我的serverless地址，这里不提供
 
 type iconType = {
@@ -70,5 +71,18 @@ export const deleteIcon = (data: any) => {
     console.log(error);
   });
 }
+
+// 随机拿一张宇宙封面
+export const getCover = () => {
+  const unsplash = createApi({
+    accessKey: token,
+    fetch: window.fetch
+  })
+
+  return unsplash.photos.getRandom({count: 1, query: 'universe'})
+}
+
+
+
 
 

@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="imageBg">
+      <div className="imageBg" style={{ backgroundImage: (window as any).newBg || '' }}>
         <div className="iconList">
           { list.length > 0 ? list.map((item: any) => <div key={item.id} onMouseDown={editIcon} 
           onClick={(e) => { 

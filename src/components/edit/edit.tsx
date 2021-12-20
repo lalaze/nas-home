@@ -5,7 +5,7 @@ import UploadCard from "../upload/index";
 import { GlobalOutlined, FieldStringOutlined } from "@ant-design/icons";
 import { TwitterPicker } from 'react-color';
 import html2canvas from 'html2canvas'
-import { setIcon, updateIcon } from '../../api/index'
+import { setIcon, updateIcon, getCover } from '../../api/index'
 import { v4 as uuidv4 } from 'uuid';
 import CropperArea from '../cropper/index'
 
@@ -20,6 +20,8 @@ const Edit: React.FC<{ setShow: Function, update: Function,
   const [img, setImg] = useState('')
 
   const [file, setFile] = useState('')
+
+  const [showTab, setShowTab] = useState('icon')
 
   const [uploadAgain, setUploadAgain] = useState(false)
 
@@ -137,18 +139,31 @@ const Edit: React.FC<{ setShow: Function, update: Function,
     input.dispatchEvent(event)
   }
 
+  const changeCover = () => {
+    getCover().then((res: any) => {
+      console.log(res)
+      if (res.status === 200) {
+        const newImgUrl = res.response[0].links.download
+      }
+    })
+  }
+
   return (
     <div className="edit leftIn" ref={(ref)=>{edit = ref}} onClick={(e) => {
       e.stopPropagation()
     }}>
       <div className="head">
         <div className="addArea">
-          <div className="add"></div>
+          <div className={ editData ? 'editIcon' : 'add'}></div>
           <span>{ editData ? '修改' : '添加' }</span>
+        </div>
+        <div className="coverArea" onClick={changeCover}>
+          <div className="discover"></div>
+          <span style={{ width: '85px' }}>点击更换封面</span>
         </div>
         <div className="close" onClick={closeAn}></div>
       </div>
-      <div className="content">
+      { showTab === 'icon' ? <div className="content">
         <div className="card">
           <Input
             className="card-item"
@@ -207,7 +222,7 @@ const Edit: React.FC<{ setShow: Function, update: Function,
             <Button className="submit" type="primary" onClick={gogogo}>保存</Button>
           </div>
         </div>
-      </div>
+      </div> : '' }
       {file ? <CropperArea file={file}  setImg={setImg} setFile={setFile}></CropperArea> : ''}
     </div>
   );
