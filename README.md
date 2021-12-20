@@ -14,5 +14,5 @@
 用mongodb跟腾讯云的serverless，账号密码写在了文件夹api的config里，这里不上传的。同理unsplash的token也不传
 
 ## TODO
-- [ ] unsplash的支持选择类型
-- [ ] 重构代码结构，现在的写的太随便了 
+- [ ] unsplash的随机图片支持选择类型
+- [ ] 重构下代码，现在的写的太随便了 
