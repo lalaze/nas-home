@@ -1,12 +1,18 @@
 ## 目的
-抄Infinity的一个react实现，练习react
+模仿Infinity的一个react实现，练习react
+
+## 当前进度
+
+![截图](https://s2.loli.net/2021/12/20/mqBM4hb7znVi39X.png)
+
+- 接入了unsplash图库
+- 接入了serveerless与mongodb
+- 图标的新建编辑保存
+- 支持docker部署
 
 ## 数据
-用mongoDB跟腾讯云的serverless，账号密码写在了文件夹api的config里，这里不上传的，要自己替换你的服务账号密码
+用mongodb跟腾讯云的serverless，账号密码写在了文件夹api的config里，这里不上传的。同理unsplash的token也不传
 
-## todo
-- [ ] 图标抖动编辑
-- [x] 图标拖动
-- [x] docker部署
-- [x] 数据改用mongoDB或者serverless
-- [ ] 接入一个图片库随机切换桌面 
+## TODO
+- [ ] unsplash的支持选择类型
+- [ ] 重构代码结构，现在的写的太随便了 
